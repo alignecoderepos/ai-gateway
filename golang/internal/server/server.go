@@ -23,12 +23,16 @@ type Server struct {
 }
 
 func New(cfg *config.Config) *Server {
-	r := gin.Default()
-	rt := routing.New()
-	rt.Register("echo", echo.New())
-	srv := &Server{cfg: cfg, engine: r, router: rt, guards: guardrails.New()}
-	srv.registerRoutes()
-	return srv
+        r := gin.Default()
+        rt := routing.New()
+        rt.Register("echo", echo.New())
+        if cfg.ModelsPath != "" {
+                // ignore error and fall back to default models if loading fails
+                _ = rt.LoadFromFile(cfg.ModelsPath)
+        }
+        srv := &Server{cfg: cfg, engine: r, router: rt, guards: guardrails.New()}
+        srv.registerRoutes()
+        return srv
 }
 
 func (s *Server) registerRoutes() {
