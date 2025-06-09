@@ -1,0 +1,108 @@
+# AI Gateway Sample Configuration
+
+# Environment settings
+environment: development  # development, testing, production
+log_level: INFO  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+
+# HTTP server settings
+http:
+  host: 0.0.0.0
+  port: 8000
+  workers: 1
+  cors:
+    allow_origins:
+      - "*"
+    allow_methods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    allow_headers:
+      - Authorization
+      - Content-Type
+    allow_credentials: false
+
+# Telemetry settings
+telemetry:
+  enabled: false
+  otlp_endpoint: http://localhost:4317
+  service_name: ai-gateway
+
+# Cost control settings
+cost_control:
+  enabled: false
+  monthly_budget: 100.0  # USD
+  default_token_limit: 16000
+  warning_threshold: 0.8
+
+# Cache settings
+cache:
+  enabled: false
+  redis_url: redis://localhost:6379/0
+  default_ttl: 3600  # seconds
+
+# Provider API keys (replace with your actual keys)
+openai_api_key: your_openai_api_key
+anthropic_api_key: your_anthropic_api_key
+gemini_api_key: your_gemini_api_key
+
+# AWS Bedrock (if using)
+aws_access_key_id: your_aws_access_key
+aws_secret_access_key: your_aws_secret_key
+aws_region: us-east-1
+
+# Azure OpenAI (if using)
+azure_openai_api_key: your_azure_openai_api_key
+azure_openai_endpoint: your_azure_openai_endpoint
+
+# Rate limiting
+enable_rate_limit: false
+rate_limit_requests: 100
+rate_limit_period: 60  # seconds
+
+# Guardrails configuration
+guardrails:
+  enabled: true
+  default_guards:
+    - profanity
+    - pii
+
+# Router configurations
+routers:
+  - name: best-model
+    type: fallback
+    targets:
+      - model: gpt-4o
+        provider: openai
+      - model: claude-3-opus
+        provider: anthropic
+      - model: gemini-pro
+        provider: gemini
+  
+  - name: balanced
+    type: percentage
+    targets_percentages:
+      - 50  # First target gets 50%
+      - 30  # Second target gets 30%
+      - 20  # Third target gets 20%
+    targets:
+      - model: gpt-4o-mini
+        provider: openai
+      - model: claude-3-sonnet
+        provider: anthropic
+      - model: gpt-3.5-turbo
+        provider: openai
+  
+  - name: optimized
+    type: optimized
+    metric:
+      name: latency
+      order: asc  # ascending = prefer lower latency
+    targets:
+      - model: gpt-3.5-turbo
+        provider: openai
+      - model: claude-3-haiku
+        provider: anthropic
+      - model: gemini-pro
+        provider: gemini

@@ -1,0 +1,425 @@
+- model: gpt-4o
+  model_provider: openai
+  inference_provider:
+    provider: openai
+    model_name: gpt-4o
+  price:
+    per_input_token: 5.0
+    per_output_token: 15.0
+    valid_from: "2024-05-01"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - vision
+    - streaming
+    - function_calling
+    - json_mode
+  type: completions
+  limits:
+    max_context_size: 128000
+  description: |
+    GPT-4o ("o" for "omni") is OpenAI's latest AI model, supporting both text and image inputs with text outputs.
+    It maintains the intelligence level of GPT-4 Turbo while being twice as fast and 50% more cost-effective.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Sampling temperature between 0 and 2. Higher values like 0.8 make output more random, while lower values like 0.2 make it more focused and deterministic.
+      min: 0.0
+      max: 2.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 1000
+      description: The maximum number of tokens to generate.
+      required: false
+    top_p:
+      type: float
+      default: 1.0
+      description: An alternative to temperature, called nucleus sampling. 0.1 means only tokens comprising the top 10% probability mass are considered.
+      min: 0.0
+      max: 1.0
+      step: 0.05
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+    stop:
+      type: string
+      default: null
+      description: Up to 4 sequences where the API will stop generating tokens.
+      required: false
+
+- model: gpt-4o-mini
+  model_provider: openai
+  inference_provider:
+    provider: openai
+    model_name: gpt-4o-mini
+  price:
+    per_input_token: 2.0
+    per_output_token: 6.0
+    valid_from: "2024-05-15"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - vision
+    - streaming
+    - function_calling
+    - json_mode
+  type: completions
+  limits:
+    max_context_size: 128000
+  description: |
+    GPT-4o Mini is a smaller and more affordable version of GPT-4o, offering strong performance with lower latency and cost.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Sampling temperature between 0 and 2. Higher values like 0.8 make output more random, while lower values like 0.2 make it more focused and deterministic.
+      min: 0.0
+      max: 2.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 1000
+      description: The maximum number of tokens to generate.
+      required: false
+    top_p:
+      type: float
+      default: 1.0
+      description: An alternative to temperature, called nucleus sampling. 0.1 means only tokens comprising the top 10% probability mass are considered.
+      min: 0.0
+      max: 1.0
+      step: 0.05
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: gpt-3.5-turbo
+  model_provider: openai
+  inference_provider:
+    provider: openai
+    model_name: gpt-3.5-turbo
+  price:
+    per_input_token: 0.5
+    per_output_token: 1.5
+    valid_from: "2023-11-06"
+  input_formats:
+    - text
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - streaming
+    - function_calling
+    - json_mode
+  type: completions
+  limits:
+    max_context_size: 16385
+  description: |
+    GPT-3.5 Turbo is a good model for everyday tasks with a good balance of intelligence and speed.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Sampling temperature between 0 and 2. Higher values like 0.8 make output more random, while lower values like 0.2 make it more focused and deterministic.
+      min: 0.0
+      max: 2.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 1000
+      description: The maximum number of tokens to generate.
+      required: false
+    top_p:
+      type: float
+      default: 1.0
+      description: An alternative to temperature, called nucleus sampling. 0.1 means only tokens comprising the top 10% probability mass are considered.
+      min: 0.0
+      max: 1.0
+      step: 0.05
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: claude-3-opus
+  model_provider: anthropic
+  inference_provider:
+    provider: anthropic
+    model_name: claude-3-opus
+  price:
+    per_input_token: 15.0
+    per_output_token: 75.0
+    valid_from: "2024-03-01"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - vision
+    - streaming
+  type: completions
+  limits:
+    max_context_size: 200000
+  description: |
+    Claude 3 Opus is Anthropic's most intelligent model, with significantly improved reasoning, math, coding, and knowledge capabilities.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Controls randomness. Lower values produce more predictable outputs, higher values more creative.
+      min: 0.0
+      max: 1.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 4096
+      description: Maximum number of tokens to generate.
+      required: false
+    top_p:
+      type: float
+      default: 1.0
+      description: An alternative to temperature sampling. A lower value (e.g., 0.1) more strongly narrows sampling.
+      min: 0.0
+      max: 1.0
+      step: 0.05
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: claude-3-sonnet
+  model_provider: anthropic
+  inference_provider:
+    provider: anthropic
+    model_name: claude-3-sonnet
+  price:
+    per_input_token: 3.0
+    per_output_token: 15.0
+    valid_from: "2024-03-01"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - vision
+    - streaming
+  type: completions
+  limits:
+    max_context_size: 200000
+  description: |
+    Claude 3 Sonnet is Anthropic's mid-range model balancing intelligence and speed. It's well-suited for a wide range of tasks.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Controls randomness. Lower values produce more predictable outputs, higher values more creative.
+      min: 0.0
+      max: 1.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 4096
+      description: Maximum number of tokens to generate.
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: claude-3-haiku
+  model_provider: anthropic
+  inference_provider:
+    provider: anthropic
+    model_name: claude-3-haiku
+  price:
+    per_input_token: 0.25
+    per_output_token: 1.25
+    valid_from: "2024-03-01"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - vision
+    - streaming
+  type: completions
+  limits:
+    max_context_size: 200000
+  description: |
+    Claude 3 Haiku is Anthropic's fastest and most compact model. It's perfect for applications requiring high throughput and minimal latency.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 1.0
+      description: Controls randomness. Lower values produce more predictable outputs, higher values more creative.
+      min: 0.0
+      max: 1.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 4096
+      description: Maximum number of tokens to generate.
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: gemini-pro
+  model_provider: google
+  inference_provider:
+    provider: gemini
+    model_name: gemini-pro
+  price:
+    per_input_token: 0.5
+    per_output_token: 1.5
+    valid_from: "2023-12-13"
+  input_formats:
+    - text
+  output_formats:
+    - text
+  capabilities:
+    - tools
+    - streaming
+  type: completions
+  limits:
+    max_context_size: 32768
+  description: |
+    Gemini Pro is Google's flagship text generation model, optimized for natural language tasks and code generation.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 0.9
+      description: Controls randomness. Lower values produce more predictable outputs, higher values more creative.
+      min: 0.0
+      max: 1.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 2048
+      description: Maximum number of tokens to generate.
+      required: false
+    top_p:
+      type: float
+      default: 1.0
+      description: An alternative to temperature sampling. A lower value (e.g., 0.1) more strongly narrows sampling.
+      min: 0.0
+      max: 1.0
+      step: 0.05
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: gemini-pro-vision
+  model_provider: google
+  inference_provider:
+    provider: gemini
+    model_name: gemini-pro-vision
+  price:
+    per_input_token: 0.5
+    per_output_token: 1.5
+    valid_from: "2023-12-13"
+  input_formats:
+    - text
+    - image
+  output_formats:
+    - text
+  capabilities:
+    - vision
+    - streaming
+  type: completions
+  limits:
+    max_context_size: 32768
+  description: |
+    Gemini Pro Vision is Google's multimodal model, supporting both text and image inputs with text outputs.
+    
+  parameters:
+    temperature:
+      type: float
+      default: 0.9
+      description: Controls randomness. Lower values produce more predictable outputs, higher values more creative.
+      min: 0.0
+      max: 1.0
+      step: 0.1
+      required: false
+    max_tokens:
+      type: int
+      default: 2048
+      description: Maximum number of tokens to generate.
+      required: false
+    stream:
+      type: boolean
+      default: false
+      description: Whether to stream the response.
+      required: false
+
+- model: text-embedding-3-small
+  model_provider: openai
+  inference_provider:
+    provider: openai
+    model_name: text-embedding-3-small
+  price:
+    per_input_token: 0.2
+    per_output_token: 0.0
+    valid_from: "2024-01-25"
+  input_formats:
+    - text
+  output_formats:
+    - text
+  capabilities: []
+  type: embeddings
+  limits:
+    max_context_size: 8191
+  description: |
+    Text Embedding 3 Small is OpenAI's smaller and more affordable embedding model. It's cost-effective for high-volume embedding needs.
+    
+  parameters:
+    dimensions:
+      type: int
+      default: 1536
+      description: The dimensions of the embedding vector.
+      required: false

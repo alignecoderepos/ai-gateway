@@ -1,4 +1,0 @@
-address: ":8080"
-models_path: "models.yaml"
-telemetry_url: "localhost:4318"
-clickhouse_url: "http://localhost:8123"
