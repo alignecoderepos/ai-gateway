@@ -1,3 +1,0 @@
-"""
-Usage package initialization.
-"""

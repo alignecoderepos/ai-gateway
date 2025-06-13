@@ -1,3 +1,0 @@
-"""
-Routing package initialization.
-"""
